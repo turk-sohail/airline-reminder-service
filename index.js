@@ -1,14 +1,27 @@
 const express = require("express");
 const app = express();
-const serverConfig = require("./config/server-config");
-
 const bodyParser = require("body-parser");
+const { sendBasicEmail } = require("./src/services/email-service");
+const { serverConfig } = require("./src/config");
+const cron = require("node-cron");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const start = async () => {
-  app.listen(serverConfig.port, () => {
-    console.log("Server is running on port", serverConfig.port);
+  app.listen(serverConfig.PORT, () => {
+    sendBasicEmail(
+      "turk@turk.com",
+      "sohailsarwarkhan18@gmail.com",
+      "hallo",
+      "wa na karo"
+    );
+
+    // cron.schedule("* * * * *", () => {
+    //   console.log("running a task every minute");
+    // });
+    console.log("Server is running on port", serverConfig.PORT);
   });
 };
+
+start();
