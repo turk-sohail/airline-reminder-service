@@ -17,9 +17,9 @@ const start = async () => {
       "wa na karo"
     );
 
-    // cron.schedule("* * * * *", () => {
-    //   console.log("running a task every minute");
-    // });
+    cron.schedule("0 15 * * *", () => {
+      console.log("running a task every minute");
+    });
     console.log("Server is running on port", serverConfig.PORT);
   });
 };
